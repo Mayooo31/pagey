@@ -9,7 +9,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 const Page = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [fontColor, setFontColor] = useState("white");
-  const [pageData, setPageData] = useState<StateType | undefined | null>(null!);
+  const [pageData, setPageData] = useState<StateType | undefined>(null!);
   const { id } = useParams();
 
   useEffect(() => {
@@ -85,18 +85,16 @@ const Page = () => {
         </div>
       </div>
     );
-  }
-
-  if (loading) {
+  } else if (loading) {
     return (
       <div className="z-50 flex items-center justify-center h-screen w-full">
         <PulseLoader color={"#38618c"} loading={loading} size={20} />
       </div>
     );
-  }
-
-  if (pageData === undefined) {
+  } else if (pageData === undefined) {
     return <NotFound />;
+  } else {
+    return <></>;
   }
 };
 

@@ -5,16 +5,15 @@ import { UserPageType } from "../types";
 
 type PropsType = {
   data: UserPageType;
-  loadUserPages: () => void;
+  userPagesData: UserPageType[];
+  setUserPagesData: React.Dispatch<React.SetStateAction<UserPageType[] | undefined>>;
 };
 
-const OnePage = ({ data, loadUserPages }: PropsType) => {
+const OnePage = ({ data, userPagesData, setUserPagesData }: PropsType) => {
   const deletePageHandler = async () => {
-    const { error } = await supabase.from("pages").delete().eq("domain", data.domain);
+    setUserPagesData(userPagesData.filter(page => page.domain !== data.domain));
 
-    if (!error) {
-      loadUserPages();
-    }
+    const { error } = await supabase.from("pages").delete().eq("domain", data.domain);
   };
 
   return (

@@ -48,7 +48,12 @@ const Pages = () => {
       <div className="w-[90%] max-w-[1200px] mx-auto grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-4 xs:gap-8 py-10">
         {userPagesData &&
           userPagesData.map(page => (
-            <OnePage loadUserPages={loadUserPages} data={page} key={page.created_at} />
+            <OnePage
+              setUserPagesData={setUserPagesData}
+              userPagesData={userPagesData}
+              data={page}
+              key={page.created_at}
+            />
           ))}
       </div>
       {userPagesData === undefined && (
